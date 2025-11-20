@@ -1,91 +1,70 @@
-TP1-DAR2025 – Sockets en mode connecté TCP
+# TP1-DAR2025 – Sockets en mode connecté TCP
 
-Informations sur le projet
+## Informations sur le projet
 
-Auteur : Hsan Khecharem
+**Auteur** : Hsan Khecharem  
+**Filière** : Licence en Sciences de l’Informatique  
+**Spécialité** : Génie Logiciel et Systèmes d’Information  
+**Faculté** : Faculté des Sciences de Sfax  
+**Sujet** : Architecture Client/Serveur – Service de calculatrice
 
-Filière : Licence en Sciences de l’Informatique
+---
 
-Spécialité : Génie Logiciel et Systèmes d’Information
+## Description
 
-Faculté : Faculté des Sciences de Sfax
+Ce travail pratique a pour objectif la mise en œuvre d'une application répartie en Java reposant sur les sockets TCP. Le projet consiste à développer un service de calculatrice fonctionnant sur une architecture Client/Serveur.
 
-Projet : Client/Serveur – Service de calculatrice
+Il permet d'aborder les concepts fondamentaux suivants :
+*   Établissement d'une connexion fiable (TCP).
+*   Gestion des flux de données (Input/Output Streams).
+*   Communication bidirectionnelle synchrone.
+*   Configuration réseau (Adresses IP et Ports) pour un déploiement local ou sur deux machines distinctes.
 
-Description du TP
+## Environnement de développement
 
-Ce TP a pour objectif de familiariser l’étudiant avec le développement d’applications réparties en Java utilisant des sockets TCP. Il consiste à concevoir une application Client/Serveur capable de communiquer de manière fiable pour effectuer des traitements côté serveur, ici un service de calculatrice. Le TP permet de comprendre la gestion des flux de données, la communication bidirectionnelle, la configuration des adresses IP et ports, et l’adaptation du code pour fonctionner sur un ordinateur local ou sur deux machines distinctes sur le même réseau local.
+*   **Langage** : Java (JDK 1.8)
+*   **IDE** : Eclipse
+*   **Protocole** : TCP/IP
 
-📂 Structure du repository
+## Structure du projet
 
-main/ : README général 
+L'arborescence du projet est organisée par activités progressives :
 
-Activité_1_1/ : Client/Serveur basique (multiplication simple)
+*   **main/** : Documentation générale.
+*   **Activité_1_1/** : Version initiale (Client/Serveur basique pour multiplication).
+*   **Activité_1_2/** : Extension pour traitement côté serveur (Localhost).
+*   **Activité_1_3/** : Version finale (Calculatrice complète multi-machines).
 
-Activité_1_2/ : Extension pour calcul côté serveur sur le même PC
+## Détail des Activités
 
-Activité_1_3/ : Calculatrice complète, communication possible sur deux machines
+### Activité 1-1 : Client/Serveur basique
+Implémentation d'une connexion simple pour comprendre le cycle de vie d'une socket.
+*   Le client envoie un entier au serveur.
+*   Le serveur multiplie l'entier par 2 et renvoie le résultat.
+*   Utilisation de `DataInputStream` et `DataOutputStream`.
 
-💻 Environnement
+### Activité 1-2 : Calcul côté serveur (Local)
+Amélioration de la logique de traitement sur la machine locale (`localhost`).
+*   Transmission fiable d'entiers sans limitation de taille standard.
+*   Le serveur centralise la logique de calcul avant de renvoyer la réponse.
 
-Java JDK 1.8
+### Activité 1-3 : Calculatrice Améliorée (Réseau)
+Développement d'un service complet supportant les 4 opérations arithmétiques (Addition, Soustraction, Multiplication, Division).
+*   **Côté Client** : Interface console interactive permettant de sélectionner l'opération et de saisir les nombres.
+*   **Côté Serveur** : Réception de l'opérateur et des opérandes, exécution du calcul et renvoi du résultat.
+*   **Réseau** : Utilisation des classes `InetAddress` et `InetSocketAddress` pour permettre la communication entre deux machines distinctes sur le même réseau local.
+*   **Gestion des ressources** : Fermeture explicite des flux et des sockets après chaque transaction pour libérer les ressources système.
 
-IDE : Eclipse
+## Spécifications Techniques
 
-📝 Description générale des activités
+L'application met en œuvre les mécanismes suivants :
+*   **Flux** : Sérialisation des types primitifs (`int`, `double`) via les flux de données Java.
+*   **Adressage** : Configuration dynamique ou statique des IP pour l'interopérabilité réseau.
+*   **Robustesse** : Gestion des connexions et des erreurs d'entrée/sortie.
 
-Activité 1-1 : Client/Serveur basique
+## Instructions d'exécution
 
-Client envoie un entier au serveur
-
-Serveur multiplie l’entier par 2 et renvoie le résultat
-
-Communication bidirectionnelle avec DataInputStream et DataOutputStream
-
-Fermeture correcte des flux et de la socket
-
-Activité 1-2 : Calcul côté serveur sur le même PC
-
-Extension de l’activité 1-1
-
-Client et serveur communiquent via localhost
-
-Transmission fiable d’entiers de n’importe quelle taille
-
-Serveur capable de traiter les données avant de renvoyer le résultat
-
-Activité 1-3 : Calculatrice améliorée
-
-Service complet avec 4 opérations : addition, soustraction, multiplication, division
-
-Menu interactif côté client pour sélectionner l’opération
-
-Communication bidirectionnelle avec TCP
-
-Adaptation pour exécution sur deux machines distinctes via IP locale
-
-Utilisation de InetAddress et InetSocketAddress pour gérer adresses et ports
-
-Fermeture correcte des flux et de la socket après chaque communication
-
-🛠️ Fonctionnalités clés
-
-Transmission fiable des entiers et doubles via DataInputStream / DataOutputStream
-
-Gestion des flux et des sockets avec fermeture correcte pour libérer les ressources
-
-Communication TCP bidirectionnelle
-
-Menu interactif pour sélectionner l’opération côté client
-
-Serveur capable d’effectuer les calculs avant d’envoyer le résultat
-
-📌 Résultats attendus
-
-Le serveur affiche les connexions et les calculs effectués
-
-Le client reçoit et affiche correctement le résultat
-
-Les quatre opérations de la calculatrice fonctionnent correctement
-
-L’application fonctionne en local et peut être adaptée pour deux machines sur le même réseau
+1.  **Serveur** : Lancer d'abord le programme côté serveur. Il restera en écoute sur le port configuré.
+2.  **Client** : Lancer le programme côté client.
+    *   Si exécution sur la même machine : utiliser `localhost`.
+    *   Si exécution sur deux machines : saisir l'adresse IP de la machine hébergeant le serveur.
